@@ -14,7 +14,7 @@
 # the License.
 
 cmake_minimum_required(VERSION 2.8.3)
-project(ssc_ds_fusion)
+project(ssc_ds_mkz)
 
 find_package(carma_cmake_common REQUIRED)
 carma_check_ros_version(1)
@@ -69,6 +69,20 @@ install(FILES
   bin/veh_interface
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/bin
 )
+
+install(FILES 
+  as_licenses/ucla_as_ssc_ds_mkz_78d00428bd6d.lic
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/as_licenses
+)
+
+install(FILES 
+  json/speed_model.json
+  json/steering_model.json
+  json/veh_controller.json
+  json/veh_interface.json
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/json
+)
+
 
 ## Mark cpp header files for installation
 install(DIRECTORY include/${PROJECT_NAME}/

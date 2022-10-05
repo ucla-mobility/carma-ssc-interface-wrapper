@@ -67,7 +67,7 @@ if [ $build_ros1_pkgs -eq 1 ]; then
     cd ${dir}
 
     # Required for ford fusion drive by wire
-    sudo git clone https://bitbucket.org/DataspeedInc/dbw_mkz_ros.git ${dir}/src/dbw-mkz-ros --branch 1.2.4
+    sudo git clone https://bitbucket.org/DataspeedInc/dbw_mkz_ros.git ${dir}/src/dbw-mkz-ros --branch 1.2.7
 
     sudo git clone https://github.com/astuff/pacmod3.git ${dir}/src/pacmod3 --branch ros1_master
     cd ${dir}/src/pacmod3

@@ -16,11 +16,6 @@
 
 declare -i false=0 true=1
 
-# This script installs the ssc_pm_lexus package using the access id and secret key as arguments
-# These tokens are required to run the script
-access_id=""
-secret_key=""
-
 while [[ $# -gt 0 ]]; do
       arg="$1"
       case $arg in
@@ -38,27 +33,8 @@ while [[ $# -gt 0 ]]; do
                   build_ros2_pkgs="$true"
                   shift
                 ;;
-            *) ##Arguments for ssc_pm_lexus
-                access_id=${arg}
-                secret_key="$2"
-                shift
-                shift
-                ;;
       esac
 done
-
-# Check if valid arguments are passed
-if [ -z $access_id ];
-    then 
-        echo "No argument provided for access_id, this script needs to be run with <ACCESS_ID> <SECRET_KEY>"
-        exit 1
-fi
-
-if [ -z $secret_key ];
-    then 
-        echo "No argument provided for secret_key, this script needs to be run with <ACCESS_ID> <SECRET_KEY>"
-        exit 1
-fi
 
 if [ $build_ros1_pkgs -eq 1 ]; then
     # ROS1 build and install
@@ -112,12 +88,3 @@ cd ~
 source /opt/autoware.ai/ros/install_ros2/setup.bash
 sudo apt-get update
 sudo apt-get -qq install apt-transport-s3
-
-sudo sh -c 'echo "AccessKeyId = '$access_id'" > /etc/apt/s3auth.conf'
-sudo sh -c 'echo "SecretAccessKey = '$secret_key'" >> /etc/apt/s3auth.conf'
-sudo sh -c 'echo "Token = \"\"" >> /etc/apt/s3auth.conf'
-sudo sh -c 'echo "Region = \"us-east-1\"" >> /etc/apt/s3auth.conf'
-
-sudo sh -c 'echo "deb [trusted=yes] s3://autonomoustuff-ssc $(lsb_release -sc) main" > /etc/apt/sources.list.d/autonomoustuff-ssc.list'
-sudo apt-get update
-sudo apt-get -y install ros-foxy-ssc-pm-lexus ros-foxy-ssc-joystick && exit 0 || echo "Installation failed for ssc_pm_lexus check access_key and secret_id" && exit 1

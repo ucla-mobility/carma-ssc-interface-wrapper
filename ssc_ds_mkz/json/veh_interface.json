@@ -1,0 +1,6 @@
+{
+    "tire_radius": 0.34,
+    "velocity_filter_const": 0.9,
+    "accel_filter_const": 0.95,
+    "min_vel_covariance": 0.01
+}
